@@ -106,7 +106,7 @@ class DreamEngine:
                 rules_json,
                 json.dumps(report.rules_invalidated),
                 report.memories_pruned,
-                json.dumps(report.weak_spots),
+                json.dumps(report.weak_spots_found),
                 report.confidence_adjustment,
                 report.summary,
             ),

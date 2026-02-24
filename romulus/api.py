@@ -1,11 +1,18 @@
+from pathlib import Path
+
 from pydantic import BaseModel
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 
 
 class AskRequest(BaseModel):
     task: str
     context: dict = {}
+
+
+STATIC_DIR = Path(__file__).resolve().parent.parent / "static"
 
 
 def create_api(daemon) -> FastAPI:
@@ -58,5 +65,13 @@ def create_api(daemon) -> FastAPI:
     @app.get("/api/vigil/incidents")
     async def get_vigil_incidents(hours: int = 24):
         return await daemon.incident_logger.get_recent_incidents(hours=hours)
+
+    # --- Static file serving for Wolf Den dashboard ---
+    if STATIC_DIR.exists():
+        app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
+
+        @app.get("/")
+        async def serve_dashboard():
+            return FileResponse(str(STATIC_DIR / "index.html"))
 
     return app
