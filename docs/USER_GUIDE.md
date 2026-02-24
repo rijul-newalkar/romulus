@@ -4,6 +4,8 @@
 
 This guide covers everything you need to know to install, run, configure, and understand Romulus.
 
+For the research papers behind the architecture, see [REFERENCES.md](REFERENCES.md).
+
 ---
 
 ## Table of Contents

@@ -321,9 +321,24 @@ romulus/
 - [ ] Multi-agent arena tournaments
 - [ ] Genetic inheritance of learned rules
 
-## Contributing
+## Documentation
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+- [User Guide](docs/USER_GUIDE.md) — Installation, configuration, and complete usage guide
+- [Research References](docs/REFERENCES.md) — The 34 papers behind the architecture
+- [Contributing](CONTRIBUTING.md) — Development workflow and guidelines
+- [Changelog](CHANGELOG.md) — Release history
+
+## Research Foundations
+
+Every Romulus subsystem is grounded in real research — 34 papers spanning neuroscience, immunology, cognitive science, and machine learning. See [REFERENCES.md](docs/REFERENCES.md) for the full bibliography.
+
+| Subsystem | Research Basis |
+|-----------|---------------|
+| Chronicle (Memory) | Tulving's episodic/semantic memory distinction (1972) |
+| Dream Engine (Sleep) | Hippocampal replay during sleep (Wilson & McNaughton, 1994), Complementary Learning Systems (McClelland et al., 1995) |
+| Vigil (Immunity) | Artificial Immune Systems (Forrest et al., 1994), Danger Theory (Matzinger, 2002) |
+| Arena (Fitness) | Genetic algorithms (Holland, 1975), Neural network calibration (Guo et al., 2017) |
+| Agent Core | ReAct (Yao et al., 2023), Retrieval-Augmented Generation (Lewis et al., 2020) |
 
 ## License
 
