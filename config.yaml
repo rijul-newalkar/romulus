@@ -1,0 +1,30 @@
+name: "Romulus"
+version: "0.1.0"
+data_dir: "data"
+soul_path: "soul.md"
+
+ollama:
+  base_url: "http://localhost:11434"
+  model: "qwen2.5:1.5b"
+  temperature: 0.7
+  max_tokens: 512
+
+dream:
+  enabled: true
+  schedule_cron: "0 3 * * *"
+  max_duration_minutes: 45
+  pruning_threshold_days: 14
+  hours_to_review: 24
+
+vigil:
+  enabled: true
+  max_actions_per_minute: 30
+
+arena:
+  evaluation_window_days: 7
+  min_fitness_threshold: 0.6
+
+interfaces:
+  dashboard_enabled: true
+  dashboard_port: 8080
+  dashboard_host: "0.0.0.0"

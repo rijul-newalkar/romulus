@@ -1,0 +1,77 @@
+destructive_patterns:
+  - pattern: "rm\\s+(-[a-zA-Z]*f|-[a-zA-Z]*r)+"
+    category: destructive
+    reason: "Recursive/forced file deletion detected"
+  - pattern: "rm\\s+-rf\\s+/"
+    category: destructive
+    reason: "Root filesystem deletion detected"
+  - pattern: "DROP\\s+(TABLE|DATABASE|INDEX)"
+    category: destructive
+    reason: "SQL DROP command detected"
+    case_insensitive: true
+  - pattern: "DELETE\\s+FROM\\s+\\w+\\s*(;|$|WHERE\\s+1)"
+    category: destructive
+    reason: "Mass SQL DELETE detected"
+    case_insensitive: true
+  - pattern: "TRUNCATE\\s+TABLE"
+    category: destructive
+    reason: "SQL TRUNCATE detected"
+    case_insensitive: true
+  - pattern: "format\\s+[a-zA-Z]:"
+    category: destructive
+    reason: "Disk format command detected"
+  - pattern: "mkfs\\."
+    category: destructive
+    reason: "Filesystem creation detected"
+  - pattern: ":\\(\\)\\{\\s*:\\|:&\\s*\\};:"
+    category: destructive
+    reason: "Fork bomb detected"
+  - pattern: "chmod\\s+(-R\\s+)?777"
+    category: destructive
+    reason: "Dangerous permission change detected"
+  - pattern: "curl.*\\|\\s*(ba)?sh"
+    category: destructive
+    reason: "Pipe to shell detected"
+  - pattern: "wget.*\\|\\s*(ba)?sh"
+    category: destructive
+    reason: "Pipe to shell detected"
+  - pattern: "sudo\\s+rm"
+    category: destructive
+    reason: "Privileged deletion detected"
+  - pattern: ">(\\s*/dev/sd|\\s*/dev/nvme|\\s*/dev/disk)"
+    category: destructive
+    reason: "Direct disk write detected"
+  - pattern: "dd\\s+.*of=/dev/"
+    category: destructive
+    reason: "Direct disk overwrite detected"
+  - pattern: "shutdown|reboot|poweroff|halt"
+    category: destructive
+    reason: "System shutdown/reboot detected"
+
+scope_violations:
+  - pattern: "~/.ssh"
+    category: scope_escape
+    reason: "Attempted access to SSH keys"
+  - pattern: "~/.aws"
+    category: scope_escape
+    reason: "Attempted access to AWS credentials"
+  - pattern: "~/.config"
+    category: scope_escape
+    reason: "Attempted access to user config"
+  - pattern: "/etc/passwd"
+    category: scope_escape
+    reason: "Attempted access to system passwords"
+  - pattern: "/etc/shadow"
+    category: scope_escape
+    reason: "Attempted access to shadow passwords"
+  - pattern: "\\.env"
+    category: scope_escape
+    reason: "Attempted access to environment secrets"
+
+loop_detection:
+  max_identical_actions: 10
+  window_seconds: 60
+
+resource_limits:
+  max_actions_per_minute: 30
+  max_tokens_per_minute: 10000
